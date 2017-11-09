@@ -22,8 +22,11 @@ def getProductMeta(soup, className, productImageURL):
 		#get description
 		name = link.a.string;
 		print('name :' + name + '\n')
-
-		writeCSV(productID + ',' + name + ',' + description + ',' + productImageURL)
+		#get price
+		pricelist = link.find_all("td", {"class": "productListing-data"})
+		price = pricelist[3].text
+		print('price :' + price)	
+     		writeCSV(productID + ',' + name + ',' + description + ',' + productImageURL + ',' + price)
 
 def isProductPage(soup):
 	checkValidate_1 = soup.find(class_ = 'productListing-odd')
